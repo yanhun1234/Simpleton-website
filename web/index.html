@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>WEATHER</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Code</title>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
 
-    <body id="weather" style="text-align: center; padding: 5px; background-color:skyblue;">
-        <form action="/year" method="POST">
-            <br>
-            <p>某城市某年的天气情况</p>
-            <div class="form">
-                <p>查找的城市</p>
-                <input class="form-name" placeholder="输入城市的名字，如：成都" name="city" type="text" autofocus>
-            </div><br>
-            <div class="form" style="margin-top: 30px;">
-                <p>查找的年份</p>
-                <input class="form-name" placeholder="输入过去十年内的年份，如：2020" name="year" type="text" autofocus>
-            </div><br>
-            <input type="submit" value="搜索" class="btn" /></br>           
-        </form>
-        <br><br>
-        <a href="/high_temperature" target="_blank">全国省会城市最高气温</a>
-        <br><br>
-        <a href="/low_temperature" target="_blank">全国省会城市最低气温</a>
+<body>
+<canvas id="myCanvas"></canvas>
+<script>
+    const width = document.getElementById("myCanvas").width = screen.availWidth;
+    const height = document.getElementById("myCanvas").height = screen.availHeight;
+    const ctx = document.getElementById("myCanvas").getContext("2d");
+    const arr = Array(Math.ceil(width / 10)).fill(0);
+    const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
 
-    </body>
+function rain() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "#0f0";
+    arr.forEach(function (value, index) {
+        ctx.fillText(str[Math.floor(Math.random() * str.length)], index * 10, value + 10);
+        arr[index] = value >= height || value > 8888 * Math.random() ? 0 : value + 10;
+    });
+}
 
+setInterval(rain, 30);
+</script>
+</body>
 </html>
